@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8eee9">
+<title>Shri Threads | Admin Dashboard</title>
+<style>
+:root{--pink:#f6e5e3;--pink2:#edd0ce;--sage:#dfe8d9;--green:#425b4a;--gold:#b58a4a;--cream:#fffaf5;--ink:#342b2b;--muted:#766a68;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:999px;padding:11px 17px;background:var(--green);color:white;font-weight:700}button:hover{filter:brightness(1.08)}button.secondary{background:var(--pink);color:var(--ink);border:1px solid var(--pink2)}button.light{background:white;color:var(--green);border:1px solid #d6dfd1}
+a{color:inherit}.topbar{background:var(--green);color:#fff;text-align:center;padding:9px 14px;font-size:12px;letter-spacing:.08em}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px clamp(16px,5vw,70px);gap:15px;border-bottom:1px solid #eee1d8;background:rgba(255,250,245,.96);position:sticky;top:0;z-index:5}
+.brand{font-family:Georgia,serif;font-size:clamp(24px,3vw,34px);color:var(--green);font-weight:bold;letter-spacing:.02em}.brand small{display:block;font-family:Arial,sans-serif;font-size:10px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-top:4px}
+nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}nav a{text-decoration:none;font-size:14px;color:var(--muted)}nav a:hover{color:var(--green)}
+.hero{padding:clamp(36px,7vw,92px) clamp(18px,7vw,100px);display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;background:linear-gradient(125deg,#f7e7e2,#f9f4e8 60%,#e5ecdf)}
+.eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--gold);font-weight:bold}.hero h1{font-family:Georgia,serif;font-size:clamp(38px,6vw,72px);line-height:1.04;margin:14px 0;color:var(--green);font-weight:normal}.hero p{line-height:1.7;color:#655a55;max-width:520px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.hero-art{min-height:300px;border-radius:48% 48% 22px 22px;background:radial-gradient(circle at 50% 42%,#fff9ef 0 18%,transparent 19%),linear-gradient(145deg,#dbe5d5,#f2d6d2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:8px solid rgba(255,255,255,.55)}.hero-art:before{content:"";position:absolute;width:210px;height:210px;border:18px dotted #b58a4a;border-radius:50%;transform:rotate(-20deg);opacity:.8}.hero-art:after{content:"✿";position:absolute;font-size:160px;color:#f7f0df;text-shadow:2px 3px 0 #c89b62;transform:rotate(10deg)}.art-label{position:absolute;bottom:20px;background:#fffaf0dd;border-radius:999px;padding:10px 18px;font-family:Georgia,serif;color:var(--green);z-index:1}
+section{padding:56px clamp(16px,5vw,70px)}.section-head{text-align:center;margin-bottom:28px}.section-head h2{font-family:Georgia,serif;font-size:clamp(29px,4vw,42px);font-weight:normal;color:var(--green);margin:8px 0}.section-head p{color:var(--muted);font-size:14px}
+.filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 28px}.filters button{background:white;color:var(--green);border:1px solid #dfe5da}.filters button.active{background:var(--green);color:white}
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.card{background:white;border:1px solid #f0e5dc;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px #49362a08;display:flex;flex-direction:column}.product-image{width:100%;aspect-ratio:4/4.3;object-fit:cover;background:linear-gradient(145deg,#f4e5df,#e4eadf);display:flex;align-items:center;justify-content:center;color:#8c7c70;font-size:12px}.product-image.placeholder{font-family:Georgia,serif;font-size:52px;color:#b58a4a}.card-content{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}.category{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}.card h3{margin:0;font-family:Georgia,serif;font-size:19px;font-weight:normal}.description{font-size:12px;line-height:1.5;color:var(--muted);flex:1}.price{font-weight:bold;color:var(--green);font-size:17px}.stock{font-size:11px;color:#5f8063}.card button{width:100%;margin-top:3px}
+.about{background:var(--sage);display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.about h2{font:normal clamp(30px,4vw,44px) Georgia,serif;color:var(--green)}.about p{line-height:1.8;color:#4f6053}.about-note{background:#ffffffa8;padding:28px;border-radius:20px;font:italic 23px/1.5 Georgia,serif;color:var(--green)}
+footer{padding:35px clamp(16px,5vw,70px);background:#334a3b;color:white;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}footer p{font-size:13px;color:#e0e9df;line-height:1.7}.footer-brand{font:28px Georgia,serif}
+.cart-fab{position:fixed;right:18px;bottom:18px;z-index:8;box-shadow:0 5px 22px #0002}.overlay{position:fixed;inset:0;background:#20191577;z-index:10;display:none;justify-content:flex-end}.overlay.open{display:flex}.drawer{width:min(470px,100%);height:100%;overflow:auto;background:var(--cream);padding:22px}.drawer-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e9dcd2;padding-bottom:14px}.drawer h2{font:normal 30px Georgia,serif;color:var(--green);margin:0}.icon-btn{background:transparent;color:var(--ink);font-size:25px;padding:4px 10px}.cart-line{display:grid;grid-template-columns:1fr auto;gap:10px;padding:16px 0;border-bottom:1px solid #e9dcd2}.cart-line small{display:block;color:var(--muted);margin-top:5px}.qty{display:flex;align-items:center;gap:8px;margin-top:9px}.qty button{padding:4px 10px}.cart-total{display:flex;justify-content:space-between;font-size:18px;font-weight:bold;padding:20px 0}.checkout-note{font-size:12px;line-height:1.5;color:var(--muted)}.empty{text-align:center;padding:45px 8px;color:var(--muted)}
+.admin{background:#fff;border:1px solid #eaded5;border-radius:18px;padding:22px;max-width:850px;margin:0 auto}.admin h3{font:normal 26px Georgia,serif;color:var(--green)}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.admin label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}.admin input,.admin select,.admin textarea{width:100%;border:1px solid #dfd4cb;border-radius:9px;padding:10px;background:#fffdfb;color:var(--ink)}.admin textarea{min-height:70px}.admin .full{grid-column:1/-1}.admin-list{margin-top:20px}.admin-category{margin-top:18px;border:1px solid #eaded5;border-radius:12px;overflow:hidden;background:#fffdfb}.admin-category-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;background:#edf1e7;color:#354b3d}.admin-category-head h4{margin:0;font:normal 19px Georgia,serif}.admin-category-head span{font-size:12px;color:#6c776c}.admin-category-body{padding:0 14px}.admin-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #eee}.admin-item:last-child{border-bottom:0}.admin-item span{font-size:13px}.admin-actions{display:flex;gap:6px;flex-shrink:0}.admin-actions button{padding:7px 11px;font-size:12px}.notice{font-size:12px;background:#fff3d9;border:1px solid #ecd5a2;padding:12px;border-radius:10px;line-height:1.5;color:#6d562c}
+.hidden{display:none!important}
+@media(max-width:850px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.hero-art{min-height:240px}.about{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}nav{gap:12px}}
+@media(max-width:440px){.products{gap:10px}.card-content{padding:10px}.card h3{font-size:17px}.hero-art{min-height:220px}.admin-grid{grid-template-columns:1fr}.admin .full{grid-column:auto}}
+
+/* Dedicated admin route: hide storefront/cart UI and keep management focused. */
+body.admin-page .topbar, body.admin-page main > .hero, body.admin-page main > #shop, body.admin-page main > #about, body.admin-page main > #contact, body.admin-page footer, body.admin-page .cart-fab, body.admin-page .overlay {display:none!important}
+body.admin-page header{position:static;box-shadow:0 2px 12px #49362a0a}
+body.admin-page main{min-height:calc(100vh - 90px)}
+body.admin-page #admin{display:block!important;max-width:1100px;margin:0 auto;padding-top:30px}
+body.admin-page .admin{max-width:100%;box-shadow:0 8px 30px #49362a0a}
+body.admin-page .admin-item{gap:14px}
+body.admin-page .admin-actions button{min-width:70px}
+@media(max-width:600px){body.admin-page #admin{padding:18px 12px}body.admin-page .admin{padding:14px}body.admin-page .admin-item{align-items:flex-start;flex-direction:column}body.admin-page .admin-actions{width:100%}body.admin-page .admin-actions button{flex:1}}
+
+</style>
+</head>
+<body class="admin-page">
+
+<header>
+  <a href="index.html" style="text-decoration:none"><div class="brand">Shri Threads<small>Admin Dashboard</small></div></a>
+  <nav><a href="index.html">← Back to Store</a><button class="secondary" onclick="signOutAdmin();location.href='index.html'">Exit Admin</button></nav>
+</header>
+<main>
+<section class="hero" id="home">
+  <div><div class="eyebrow">Handcrafted accessories</div><h1>A little tradition.<br>A lot of love.</h1><p>Discover colourful bangles and charming hair accessories, thoughtfully chosen to add a special touch to your everyday style and celebrations.</p><div class="hero-actions"><a href="#shop"><button>Explore the collection</button></a><a href="#about"><button class="light">Our story</button></a></div></div>
+  <div class="hero-art" role="img" aria-label="Decorative floral jewellery illustration"><div class="art-label">Made with love ♡</div></div>
+</section>
+<section id="shop">
+  <div class="section-head"><div class="eyebrow">The collection</div><h2>Find your favourite</h2><p>Choose your pieces, add them to your cart, and send your order to us on WhatsApp.</p></div>
+  <div class="filters" id="filters"></div>
+  <div class="products" id="products"></div>
+</section>
+<section class="about" id="about"><div><div class="eyebrow">A note from us</div><h2>Small details make beautiful memories.</h2><p>Shri Threads celebrates colour, creativity and the joy of handmade accessories. From festive moments to everyday outfits, we hope you find something that feels uniquely yours.</p><p>Have a custom colour or design in mind? Add your chosen products to WhatsApp and tell us what you'd love.</p></div><div class="about-note">“Every thread tells a story, every colour carries a feeling.”</div></section>
+<section id="admin" class="hidden">
+  <div class="section-head"><div class="eyebrow">Store management</div><h2>Shri Threads Admin</h2><p>Sign in to manage products. Customers can browse the live catalogue without signing in.</p></div>
+  <div class="admin">
+    <div class="notice" id="connectionStatus">Connecting to the Shri Threads database…</div>
+    <div id="loginPanel">
+      <h3>Admin login</h3>
+      <form id="loginForm" class="admin-grid">
+        <div><label for="adminEmail">Admin email</label><input id="adminEmail" type="email" autocomplete="username" required placeholder="you@example.com"></div>
+        <div><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" required placeholder="Your password"></div>
+        <div class="full"><button type="submit">Sign in</button></div>
+      </form>
+      <p id="loginMessage" role="status" style="font-size:13px;color:var(--muted)"></p>
+    </div>
+    <div id="adminPanel" class="hidden">
+      <p>Signed in as <strong id="signedInEmail"></strong> <button type="button" class="secondary" onclick="signOutAdmin()">Sign out</button></p>
+    <h3 id="formTitle">Add a product</h3>
+    <form id="productForm" class="admin-grid">
+      <input type="hidden" id="editId">
+      <div><label for="pName">Product name *</label><input id="pName" required placeholder="e.g. Pink silk thread bangles"></div>
+      <div><label for="pCategory">Category *</label><select id="pCategory"><option>Bangles</option><option>Hair Accessories</option><option>Saree Pins</option><option>Other</option></select></div>
+      <div><label for="pPrice">Price in ₹ *</label><input id="pPrice" required type="number" min="0" step="1" placeholder="299"></div>
+      <div><label for="pStock">Stock status</label><select id="pStock"><option value="In stock">In stock</option><option value="Sold out">Sold out</option></select></div>
+      <div class="full"><label for="pDesc">Description</label><textarea id="pDesc" placeholder="Material, size, colour, set quantity..."></textarea></div>
+      <div class="full"><label for="pImageFile">Upload product image (JPG, PNG, WebP; max 5 MB)</label><input id="pImageFile" type="file" accept="image/jpeg,image/png,image/webp"><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><button type="button" class="secondary" id="uploadImageBtn" onclick="uploadProductImage()">Upload image</button><span id="uploadStatus" role="status" style="font-size:12px;color:var(--muted)">Upload an image to Supabase Storage, or paste a direct image URL below.</span></div></div><div class="full"><label for="pImage">Image URL (optional)</label><input id="pImage" type="url" placeholder="https://..." /></div>
+      <div class="full" style="display:flex;gap:8px;flex-wrap:wrap"><button type="submit">Save product</button><button type="button" class="secondary" onclick="resetForm()">Clear form</button></div>
+    </form>
+    <div class="admin-list"><h3>Products by category</h3><p style="font-size:13px;color:var(--muted)">Edit or delete products in the shared database. Changes appear on the storefront.</p><div id="adminList"></div></div>
+    </div>
+  </div>
+</section>
+<section id="contact" style="text-align:center;background:#f7e9e4"><div class="section-head"><div class="eyebrow">We'd love to hear from you</div><h2>Let's talk on WhatsApp</h2><p>Questions about colours, sizes, availability or custom orders? Send us a message.</p><button onclick="contactWhatsApp()">Chat with Shri Threads</button><p style="font-size:11px;color:#766a68">WhatsApp: 8074364849</p></div></section>
+</main>
+<footer><div><div class="footer-brand">Shri Threads</div><p>Handmade with love, for every little celebration.</p></div><div><strong>Explore</strong><p><a href="#shop">Shop collection</a><br><a href="#about">Our story</a><br><a href="#contact">Contact</a></p></div><div><p>© <span id="year"></span> Shri Threads<br>Made with care ♡</p></div></footer>
+<button class="cart-fab" onclick="openCart()">View cart · <span id="cartCount2">0</span></button>
+<div class="overlay" id="cartOverlay" onclick="if(event.target===this)closeCart()"><aside class="drawer">
+  <div class="drawer-head"><h2>Your cart</h2><button class="icon-btn" onclick="closeCart()" aria-label="Close cart">×</button></div>
+  <div id="cartItems"></div><div id="cartBottom" class="hidden"><div class="cart-total"><span>Subtotal</span><span id="cartTotal">₹0</span></div><p class="checkout-note">Delivery charges and availability will be confirmed by Shri Threads. Tapping the button opens WhatsApp with your order summary; please press Send in WhatsApp.</p><label style="display:block;font-size:12px;margin:12px 0 5px;color:#766a68" for="customerName">Your name (optional)</label><input id="customerName" placeholder="Enter your name" style="width:100%;padding:11px;border:1px solid #dfd4cb;border-radius:9px"><button style="width:100%;margin-top:12px" onclick="checkoutWhatsApp()">Order on WhatsApp</button></div>
+</aside></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* IMPORTANT: Replace with your WhatsApp number including country code, digits only.
+   Example India: 919876543210 (do not use +, spaces, or dashes). */
+const WHATSAPP_NUMBER = "918074364849";
+const SUPABASE_URL = "https://wiykcawvqapvajkoimpd.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_90plnMZQaQ7QNdqx7vPczQ_cmsxWr9Q";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+const CART_KEY = "shriThreadsCart_v1";
+let products = [];
+let cart = JSON.parse(localStorage.getItem(CART_KEY) || "{}");
+let activeCategory = "All";
+let currentAdmin = null;
+function mapProduct(row){return {id:row.id,name:row.name,category:row.category,price:Number(row.price),stock:Number(row.stock)>0?"In stock":"Sold out",description:row.description||"",image:row.image_url||""};}
+async function loadProducts(){const {data,error}=await db.from("products").select("id,name,category,price,description,image_url,stock,created_at").order("created_at",{ascending:false});if(error){console.error(error);document.getElementById("connectionStatus").textContent="Could not load products from Supabase: "+error.message;products=[];}else{products=(data||[]).map(mapProduct);}renderProducts();renderAdmin();updateCartCount();
+document.getElementById("connectionStatus").textContent="Connected to Supabase. Sign in below to manage products.";
+loadProducts();checkAdmin();
+db.auth.onAuthStateChange((_event,session)=>{if(!session){currentAdmin=null;showAdmin(false);}});}
+async function checkAdmin(){const {data:{session}}=await db.auth.getSession();if(!session){showAdmin(false);return;}const {data,error}=await db.from("admin_users").select("user_id").eq("user_id",session.user.id).maybeSingle();if(error||!data){await db.auth.signOut();showAdmin(false);document.getElementById("loginMessage").textContent="This account is not registered as a Shri Threads admin. Check the admin_users setup.";return;}currentAdmin=session.user;showAdmin(true);await loadProducts();}
+function showAdmin(isAdmin){document.getElementById("loginPanel").classList.toggle("hidden",isAdmin);document.getElementById("adminPanel").classList.toggle("hidden",!isAdmin);if(isAdmin)document.getElementById("signedInEmail").textContent=currentAdmin.email;}
+document.getElementById("loginForm").addEventListener("submit",async e=>{e.preventDefault();const msg=document.getElementById("loginMessage");msg.textContent="Signing in…";const {data,error}=await db.auth.signInWithPassword({email:document.getElementById("adminEmail").value.trim(),password:document.getElementById("adminPassword").value});if(error){msg.textContent="Login failed: "+error.message;return;}currentAdmin=data.user;const {data:admin,error:adminError}=await db.from("admin_users").select("user_id").eq("user_id",data.user.id).maybeSingle();if(adminError||!admin){await db.auth.signOut();currentAdmin=null;msg.textContent="This account is not approved as an admin yet. Check the email used in the SQL setup.";showAdmin(false);return;}msg.textContent="Signed in successfully.";showAdmin(true);await loadProducts();});
+async function signOutAdmin(){await db.auth.signOut();currentAdmin=null;showAdmin(false);document.getElementById("loginMessage").textContent="You have signed out.";}
+function money(n){return "₹"+Number(n||0).toLocaleString("en-IN",{maximumFractionDigits:2});}
+function safe(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function renderFilters(){const cats=["All",...new Set(products.map(p=>p.category))];document.getElementById("filters").innerHTML=cats.map(c=>`<button class="${c===activeCategory?"active":""}" onclick="setCategory('${safe(c).replace(/'/g,"\\'")}')">${safe(c)}</button>`).join("");}
+function setCategory(c){activeCategory=c;renderProducts();}
+function renderProducts(){renderFilters();const list=products.filter(p=>activeCategory==="All"||p.category===activeCategory);const root=document.getElementById("products");if(!list.length){root.innerHTML='<p>No products in this category yet.</p>';return;}root.innerHTML=list.map(p=>`<article class="card"><div class="product-image ${p.image?"":"placeholder"}">${p.image?`<img src="${safe(p.image)}" alt="${safe(p.name)}" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.innerHTML='♡'">`:"♡"}</div><div class="card-content"><div class="category">${safe(p.category)}</div><h3>${safe(p.name)}</h3><div class="description">${safe(p.description||"Handpicked with love by Shri Threads.")}</div><div class="price">${money(p.price)}</div><div class="stock">${safe(p.stock)}</div><button ${p.stock!=="In stock"?"disabled style='opacity:.5'":""} onclick="addToCart('${p.id}')">${p.stock==="In stock"?"Add to cart":"Sold out"}</button></div></article>`).join("");}
+function addToCart(id){const p=products.find(x=>x.id===id);if(!p||p.stock!=="In stock")return;cart[id]=(cart[id]||0)+1;saveCart();openCart();}
+function saveCart(){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartCount();}
+function updateCartCount(){const n=Object.values(cart).reduce((a,b)=>a+Number(b),0);document.getElementById("cartCount").textContent=n;document.getElementById("cartCount2").textContent=n;}
+function openCart(){renderCart();document.getElementById("cartOverlay").classList.add("open");}
+function closeCart(){document.getElementById("cartOverlay").classList.remove("open");}
+function changeQty(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];saveCart();renderCart();}
+function renderCart(){const entries=Object.entries(cart).filter(([id,q])=>q>0&&products.some(p=>p.id===id));const root=document.getElementById("cartItems");if(!entries.length){root.innerHTML='<div class="empty">Your cart is waiting for something lovely. ♡<br><br><button onclick="closeCart();document.getElementById(\'shop\').scrollIntoView()">Explore products</button></div>';document.getElementById("cartBottom").classList.add("hidden");return;}let total=0;root.innerHTML=entries.map(([id,q])=>{const p=products.find(x=>x.id===id);total+=p.price*q;return `<div class="cart-line"><div><strong>${safe(p.name)}</strong><small>${money(p.price)} each</small><div class="qty"><button onclick="changeQty('${id}',-1)" aria-label="Decrease quantity">−</button><span>${q}</span><button onclick="changeQty('${id}',1)" aria-label="Increase quantity">+</button><button class="secondary" onclick="changeQty('${id}',-999)">Remove</button></div></div><strong>${money(p.price*q)}</strong></div>`}).join("");document.getElementById("cartTotal").textContent=money(total);document.getElementById("cartBottom").classList.remove("hidden");}
+function getOrder(){const entries=Object.entries(cart).filter(([id,q])=>q>0&&products.some(p=>p.id===id));let total=0;const lines=entries.map(([id,q],i)=>{const p=products.find(x=>x.id===id);total+=p.price*q;return `${i+1}. ${p.name} | Qty: ${q} | ${money(p.price)} each = ${money(p.price*q)}`;});return {entries,total,lines};}
+function whatsappUrl(message){if(!/^91\d{10}$/.test(WHATSAPP_NUMBER)){alert("Please set your WhatsApp number in the code first. Search for WHATSAPP_NUMBER near the top of the script and enter your Indian number as 91 followed by 10 digits.");return null;}return "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message);}
+function checkoutWhatsApp(){const o=getOrder();if(!o.entries.length)return;const name=document.getElementById("customerName").value.trim();const message=`Hello Shri Threads! I'd like to place an order.${name?"\nName: "+name:""}\n\n${o.lines.join("\n")}\n\nSubtotal: ${money(o.total)}\nDelivery: Please confirm delivery charges and availability.\n\nPlease confirm my order.`;const url=whatsappUrl(message);if(url)window.open(url,"_blank","noopener");}
+function contactWhatsApp(){const url=whatsappUrl("Hello Shri Threads! I'd like to know more about your products.");if(url)window.open(url,"_blank","noopener");}
+function resetForm(){document.getElementById("productForm").reset();document.getElementById("editId").value="";document.getElementById("formTitle").textContent="Add a product";document.getElementById("uploadStatus").textContent="Upload an image to Supabase Storage, or paste a direct image URL below.";}
+async function uploadProductImage(){
+  if(!currentAdmin){alert("Please sign in as admin first.");return;}
+  const input=document.getElementById("pImageFile"), file=input.files&&input.files[0], status=document.getElementById("uploadStatus"), btn=document.getElementById("uploadImageBtn");
+  if(!file){status.textContent="Choose an image file first.";return;}
+  if(!["image/jpeg","image/png","image/webp"].includes(file.type)){status.textContent="Please choose a JPG, PNG, or WebP image.";return;}
+  if(file.size>5*1024*1024){status.textContent="Image is larger than 5 MB. Please choose a smaller file.";return;}
+  btn.disabled=true;status.textContent="Uploading image…";
+  try{
+    const ext=({"image/jpeg":"jpg","image/png":"png","image/webp":"webp"})[file.type];
+    const path=`${currentAdmin.id}/${crypto.randomUUID()}.${ext}`;
+    const {data,error}=await db.storage.from("product-images").upload(path,file,{contentType:file.type,upsert:false});
+    if(error)throw error;
+    const {data:publicData}=db.storage.from("product-images").getPublicUrl(data.path);
+    document.getElementById("pImage").value=publicData.publicUrl;
+    status.textContent="Image uploaded. Save the product to publish it.";
+  }catch(err){console.error(err);status.textContent="Upload failed: "+(err.message||"Unknown error")+". Check the Storage policies in the next setup step.";}
+  finally{btn.disabled=false;}
+}
+document.getElementById("productForm").addEventListener("submit",async e=>{e.preventDefault();if(!currentAdmin){alert("Please sign in as admin first.");return;}const form=e.currentTarget;const submit=form.querySelector('button[type="submit"]');if(submit.disabled)return;const id=document.getElementById("editId").value;const item={name:document.getElementById("pName").value.trim(),category:document.getElementById("pCategory").value,price:Number(document.getElementById("pPrice").value),stock:document.getElementById("pStock").value==="In stock"?1:0,description:document.getElementById("pDesc").value.trim(),image_url:document.getElementById("pImage").value.trim()};if(!item.name||!Number.isFinite(item.price)||item.price<0)return;submit.disabled=true;submit.textContent=id?"Updating…":"Saving…";try{const result=id?await db.from("products").update(item).eq("id",id):await db.from("products").insert(item);if(result.error)throw result.error;await loadProducts();resetForm();document.getElementById("loginMessage").textContent="Product saved successfully.";}catch(err){alert("Could not save product: "+(err.message||err));}finally{submit.disabled=false;submit.textContent="Save product";}});
+async function editProduct(id){const p=products.find(x=>x.id===id);if(!p)return;document.getElementById("editId").value=p.id;document.getElementById("pName").value=p.name;document.getElementById("pCategory").value=p.category;document.getElementById("pPrice").value=p.price;document.getElementById("pStock").value=p.stock;document.getElementById("pDesc").value=p.description||"";document.getElementById("pImage").value=p.image||"";document.getElementById("formTitle").textContent="Edit product";document.getElementById("admin").scrollIntoView({behavior:"smooth"});}
+async function deleteProduct(id){if(!currentAdmin||!confirm("Delete this product from the shared catalogue?"))return;try{const {error}=await db.from("products").delete().eq("id",id);if(error)throw error;delete cart[id];saveCart();await loadProducts();renderCart();}catch(err){alert("Could not delete product: "+(err.message||err));}}
+function renderAdmin(){
+  const root=document.getElementById("adminList");
+  if(!products.length){root.innerHTML="<p>No products yet. Add your first product using the form above.</p>";return;}
+  const categoryOrder=["Bangles","Hair Accessories","Saree Pins","Other"];
+  const categories=[...categoryOrder.filter(c=>products.some(p=>p.category===c)),...new Set(products.map(p=>p.category).filter(c=>!categoryOrder.includes(c)))];
+  root.innerHTML=categories.map(category=>{
+    const items=products.filter(p=>p.category===category);
+    return `<section class="admin-category"><div class="admin-category-head"><h4>${safe(category)}</h4><span>${items.length} product${items.length===1?"":"s"}</span></div><div class="admin-category-body">${items.map(p=>`<div class="admin-item"><span><strong>${safe(p.name)}</strong><br>${money(p.price)} · <span style="color:${p.stock==="In stock"?"#42684e":"#9a5a4e"}">${safe(p.stock)}</span></span><div class="admin-actions"><button type="button" onclick="editProduct('${p.id}')">Edit</button><button type="button" class="secondary" onclick="deleteProduct('${p.id}')">Delete</button></div></div>`).join("")}</div></section>`;
+  }).join("");
+}
+document.getElementById("year").textContent=new Date().getFullYear();
+renderProducts();renderAdmin();updateCartCount();
+document.getElementById("connectionStatus").textContent="Connected to Supabase. Sign in below to manage products.";
+loadProducts();checkAdmin();
+db.auth.onAuthStateChange((_event,session)=>{if(!session){currentAdmin=null;showAdmin(false);}});
+</script>
+</body>
+</html>
