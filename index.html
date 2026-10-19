@@ -18,11 +18,23 @@ nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}nav a{text-decoratio
 section{padding:56px clamp(16px,5vw,70px)}.section-head{text-align:center;margin-bottom:28px}.section-head h2{font-family:Georgia,serif;font-size:clamp(29px,4vw,42px);font-weight:normal;color:var(--green);margin:8px 0}.section-head p{color:var(--muted);font-size:14px}
 .filters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 28px}.filters button{background:white;color:var(--green);border:1px solid #dfe5da}.filters button.active{background:var(--green);color:white}
 .customization-note{display:flex;flex-direction:column;gap:5px;align-items:center;margin:16px auto 0;padding:12px 18px;max-width:650px;border:1px solid #dfe5da;border-radius:12px;background:#f4f7ef;color:var(--green);font-size:13px;line-height:1.5}.customization-note span{font-size:12px;color:var(--muted)}.customization-tag{display:inline-flex;align-self:flex-start;align-items:center;gap:5px;padding:5px 8px;border-radius:7px;background:#f4f7ef;color:var(--green);font-size:11px;font-weight:700}
-.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.card{background:white;border:1px solid #f0e5dc;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px #49362a08;display:flex;flex-direction:column}.product-image{width:100%;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(145deg,#f4e5df,#e4eadf);display:flex;align-items:center;justify-content:center;color:#8c7c70;font-size:12px}.product-image img{width:100%;height:100%;object-fit:contain;display:block}.size-label{display:block;font-size:11px;color:var(--muted);margin-top:2px}.size-option{width:100%;padding:9px;border:1px solid #dfd4cb;border-radius:9px;background:#fffdfb;color:var(--ink)}.product-image.placeholder{font-family:Georgia,serif;font-size:52px;color:#b58a4a}.card-content{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}.category{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}.card h3{margin:0;font-family:Georgia,serif;font-size:19px;font-weight:normal}.description{font-size:12px;line-height:1.5;color:var(--muted);flex:1}.price{font-weight:bold;color:var(--green);font-size:17px}.stock{font-size:11px;color:#5f8063}.card button{width:100%;margin-top:3px}
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.card{background:white;border:1px solid #f0e5dc;border-radius:16px;overflow:hidden;box-shadow:0 5px 20px #49362a08;display:flex;flex-direction:column}.product-image{width:100%;aspect-ratio:1/1;overflow:hidden;background:linear-gradient(145deg,#f4e5df,#e4eadf);display:flex;align-items:center;justify-content:center;color:#8c7c70;font-size:12px}.product-image img{width:100%;height:100%;object-fit:contain;display:block}.product-image{cursor:zoom-in}.card h3{cursor:pointer}.product-image:hover img{transform:scale(1.025);transition:transform .2s ease}.size-label{display:block;font-size:11px;color:var(--muted);margin-top:2px}.size-option{width:100%;padding:9px;border:1px solid #dfd4cb;border-radius:9px;background:#fffdfb;color:var(--ink)}.product-image.placeholder{font-family:Georgia,serif;font-size:52px;color:#b58a4a}.card-content{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}.category{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)}.card h3{margin:0;font-family:Georgia,serif;font-size:19px;font-weight:normal}.description{font-size:12px;line-height:1.5;color:var(--muted);flex:1}.price{font-weight:bold;color:var(--green);font-size:17px}.stock{font-size:11px;color:#5f8063}.card button{width:100%;margin-top:3px}
 .about{background:var(--sage);display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.about h2{font:normal clamp(30px,4vw,44px) Georgia,serif;color:var(--green)}.about p{line-height:1.8;color:#4f6053}.about-note{background:#ffffffa8;padding:28px;border-radius:20px;font:italic 23px/1.5 Georgia,serif;color:var(--green)}
 footer{padding:35px clamp(16px,5vw,70px);background:#334a3b;color:white;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}footer p{font-size:13px;color:#e0e9df;line-height:1.7}.footer-brand{font:28px Georgia,serif}
 .cart-fab{position:fixed;right:18px;bottom:18px;z-index:8;box-shadow:0 5px 22px #0002}.overlay{position:fixed;inset:0;background:#20191577;z-index:10;display:none;justify-content:flex-end}.overlay.open{display:flex}.drawer{width:min(470px,100%);height:100%;overflow:auto;background:var(--cream);padding:22px}.drawer-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e9dcd2;padding-bottom:14px}.drawer h2{font:normal 30px Georgia,serif;color:var(--green);margin:0}.icon-btn{background:transparent;color:var(--ink);font-size:25px;padding:4px 10px}.cart-line{display:grid;grid-template-columns:1fr auto;gap:10px;padding:16px 0;border-bottom:1px solid #e9dcd2}.cart-line small{display:block;color:var(--muted);margin-top:5px}.qty{display:flex;align-items:center;gap:8px;margin-top:9px}.qty button{padding:4px 10px}.cart-total{display:flex;justify-content:space-between;font-size:18px;font-weight:bold;padding:20px 0}.checkout-note{font-size:12px;line-height:1.5;color:var(--muted)}.empty{text-align:center;padding:45px 8px;color:var(--muted)}
 .hidden{display:none!important}
+.product-modal{position:fixed;inset:0;z-index:20;background:#201915aa;display:none;align-items:center;justify-content:center;padding:20px;overflow:auto}
+.product-modal.open{display:flex}
+.product-modal-panel{position:relative;width:min(960px,100%);max-height:calc(100vh - 40px);overflow:auto;background:var(--cream);border:1px solid #f0e5dc;border-radius:20px;box-shadow:0 20px 70px #0003;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)}
+.product-modal-image{min-height:440px;display:flex;align-items:center;justify-content:center;padding:22px;background:linear-gradient(145deg,#f4e5df,#e4eadf);border-radius:20px 0 0 20px}
+.product-modal-image img{display:block;width:100%;height:100%;max-height:70vh;object-fit:contain}
+.product-modal-details{padding:clamp(22px,4vw,42px);display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.product-modal-details h2{font:normal clamp(27px,4vw,38px)/1.15 Georgia,serif;color:var(--green);margin:0}
+.product-modal-price{font-size:23px;font-weight:bold;color:var(--green)}.product-modal-description{color:var(--muted);font-size:14px;line-height:1.7;white-space:pre-line}
+.product-modal-details .size-label{font-size:12px;margin-top:4px}.product-modal-details .size-option{max-width:260px}
+.product-modal-close{position:absolute;top:12px;right:12px;z-index:1;background:#fff;color:var(--ink);border:1px solid #e7d9cf;width:42px;height:42px;padding:0;font-size:27px;box-shadow:0 2px 8px #0001}
+.product-modal-actions{display:flex;flex-direction:column;gap:9px;width:100%;margin-top:4px}.product-modal-actions button{width:100%}
+@media(max-width:650px){.product-modal{padding:10px}.product-modal-panel{grid-template-columns:1fr;max-height:calc(100vh - 20px);border-radius:16px}.product-modal-image{min-height:0;height:min(43vh,360px);padding:14px;border-radius:16px 16px 0 0}.product-modal-image img{max-height:100%}.product-modal-details{padding:20px;gap:10px}.product-modal-close{top:9px;right:9px;width:38px;height:38px}.product-modal-details .size-option{max-width:none}}
 @media(max-width:850px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.hero-art{min-height:240px}.about{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}nav{gap:12px}}
 @media(max-width:440px){.products{gap:10px}.card-content{padding:10px}.card h3{font-size:17px}.hero-art{min-height:220px}.admin-grid{grid-template-columns:1fr}.admin .full{grid-column:auto}}
 </style>
@@ -52,6 +64,22 @@ footer{padding:35px clamp(16px,5vw,70px);background:#334a3b;color:white;display:
   <div class="drawer-head"><h2>Your cart</h2><button class="icon-btn" onclick="closeCart()" aria-label="Close cart">×</button></div>
   <div id="cartItems"></div><div id="cartBottom" class="hidden"><div class="cart-total"><span>Subtotal</span><span id="cartTotal">₹0</span></div><p class="checkout-note">Delivery charges and availability will be confirmed by Shri Threads. Tapping the button opens WhatsApp with your order summary; please press Send in WhatsApp.</p><label style="display:block;font-size:12px;margin:12px 0 5px;color:#766a68" for="customerName">Your name (optional)</label><input id="customerName" placeholder="Enter your name" style="width:100%;padding:11px;border:1px solid #dfd4cb;border-radius:9px"><button style="width:100%;margin-top:12px" onclick="checkoutWhatsApp()">Order on WhatsApp</button></div>
 </aside></div>
+<div class="product-modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="productModalName" onclick="if(event.target===this)closeProductModal()">
+  <div class="product-modal-panel">
+    <button class="product-modal-close" onclick="closeProductModal()" aria-label="Close product preview">×</button>
+    <div class="product-modal-image" id="productModalImage"></div>
+    <div class="product-modal-details">
+      <div class="category" id="productModalCategory"></div>
+      <h2 id="productModalName"></h2>
+      <div class="product-modal-price" id="productModalPrice"></div>
+      <div class="stock" id="productModalStock"></div>
+      <p class="product-modal-description" id="productModalDescription"></p>
+      <div id="productModalSize" style="width:100%"></div>
+      <div class="customization-tag">✨ Customization available</div>
+      <div class="product-modal-actions"><button id="productModalAdd" onclick="addPreviewToCart()">Add to cart</button><button class="secondary" onclick="closeProductModal()">Continue shopping</button></div>
+    </div>
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* IMPORTANT: Replace with your WhatsApp number including country code, digits only.
@@ -94,9 +122,45 @@ function renderProducts(){
     const sizeControl=isBangle(p)
       ? `<label class="size-label" for="size-${safe(p.id)}">Choose size</label><select class="size-option" id="size-${safe(p.id)}" aria-label="Choose bangle size"><option value="">Select size</option><option value="2-2">2-2</option><option value="2-4">2-4</option><option value="2-6">2-6</option><option value="2-8">2-8</option></select>`
       : `<label class="size-label" for="size-${safe(p.id)}">Size</label><select class="size-option" id="size-${safe(p.id)}" aria-label="Product size" disabled><option value="Fixed size">Fixed size</option></select>`;
-    return `<article class="card"><div class="product-image ${p.image?"":"placeholder"}">${p.image?`<img src="${safe(p.image)}" alt="${safe(p.name)}" onerror="this.parentElement.innerHTML='♡'">`:"♡"}</div><div class="card-content"><div class="category">${safe(p.category)}</div><h3>${safe(p.name)}</h3>${sizeControl}<div class="customization-tag">✨ Customization available</div><div class="price">${money(p.price)}</div><div class="stock">${safe(p.stock)}</div><button ${p.stock!=="In stock"?"disabled style='opacity:.5'":""} onclick="addToCart('${safe(p.id)}')">${p.stock==="In stock"?"Add to cart":"Sold out"}</button></div></article>`;
+    return `<article class="card"><div class="product-image ${p.image?"":"placeholder"}" role="button" tabindex="0" aria-label="View ${safe(p.name)} larger" onclick="openProductModal('${safe(p.id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProductModal('${safe(p.id)}')}">${p.image?`<img src="${safe(p.image)}" alt="${safe(p.name)}" onerror="this.parentElement.innerHTML='♡'">`:"♡"}</div><div class="card-content"><div class="category">${safe(p.category)}</div><h3 role="button" tabindex="0" onclick="openProductModal('${safe(p.id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProductModal('${safe(p.id)}')}">${safe(p.name)}</h3>${sizeControl}<div class="customization-tag">✨ Customization available</div><div class="price">${money(p.price)}</div><div class="stock">${safe(p.stock)}</div><button ${p.stock!=="In stock"?"disabled style='opacity:.5'":""} onclick="addToCart('${safe(p.id)}')">${p.stock==="In stock"?"Add to cart":"Sold out"}</button></div></article>`;
   }).join("");
 }
+let previewProductId = null;
+function openProductModal(id){
+  const p=products.find(x=>String(x.id)===String(id));
+  if(!p)return;
+  previewProductId=String(p.id);
+  const image=document.getElementById("productModalImage");
+  image.innerHTML=p.image?`<img src="${safe(p.image)}" alt="${safe(p.name)}" onerror="this.parentElement.innerHTML='♡'">`:'<span style="font:normal 100px Georgia,serif;color:var(--gold)">♡</span>';
+  document.getElementById("productModalCategory").textContent=p.category||"Accessories";
+  document.getElementById("productModalName").textContent=p.name;
+  document.getElementById("productModalPrice").textContent=money(p.price);
+  document.getElementById("productModalStock").textContent=p.stock;
+  document.getElementById("productModalDescription").textContent=p.description||"Beautifully chosen for your special moments. Customization is available.";
+  document.getElementById("productModalSize").innerHTML=isBangle(p)
+    ? '<label class="size-label" for="previewSize">Choose bangle size</label><select class="size-option" id="previewSize"><option value="">Select size</option><option value="2-2">2-2</option><option value="2-4">2-4</option><option value="2-6">2-6</option><option value="2-8">2-8</option></select>'
+    : '<label class="size-label" for="previewSize">Size</label><select class="size-option" id="previewSize" disabled><option value="Fixed size">Fixed size</option></select>';
+  const cardSize=document.getElementById("size-"+p.id);
+  const previewSize=document.getElementById("previewSize");
+  if(cardSize&&previewSize&&!previewSize.disabled)previewSize.value=cardSize.value;
+  const add=document.getElementById("productModalAdd");
+  add.disabled=p.stock!=="In stock";
+  add.textContent=p.stock==="In stock"?"Add to cart":"Sold out";
+  add.style.opacity=p.stock==="In stock"?"1":".5";
+  document.getElementById("productModal").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closeProductModal(){document.getElementById("productModal").classList.remove("open");document.body.style.overflow="";previewProductId=null;}
+function addPreviewToCart(){
+  if(previewProductId===null)return;
+  const selector=document.getElementById("previewSize");
+  const cardSelector=document.getElementById("size-"+previewProductId);
+  if(selector&&cardSelector&&!selector.disabled)cardSelector.value=selector.value;
+  const id=previewProductId;
+  closeProductModal();
+  addToCart(id);
+}
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeProductModal();closeCart();}});
 function addToCart(id){
   const p=products.find(x=>String(x.id)===String(id));
   if(!p||p.stock!=="In stock")return;
