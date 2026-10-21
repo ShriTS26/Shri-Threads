@@ -37,13 +37,30 @@ footer{padding:35px clamp(16px,5vw,70px);background:#334a3b;color:white;display:
 @media(max-width:650px){.product-modal{padding:10px}.product-modal-panel{grid-template-columns:1fr;max-height:calc(100vh - 20px);border-radius:16px}.product-modal-image{min-height:0;height:min(43vh,360px);padding:14px;border-radius:16px 16px 0 0}.product-modal-image img{max-height:100%}.product-modal-details{padding:20px;gap:10px}.product-modal-close{top:9px;right:9px;width:38px;height:38px}.product-modal-details .size-option{max-width:none}}
 @media(max-width:850px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.hero-art{min-height:240px}.about{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}nav{gap:12px}}
 @media(max-width:440px){.products{gap:10px}.card-content{padding:10px}.card h3{font-size:17px}.hero-art{min-height:220px}.admin-grid{grid-template-columns:1fr}.admin .full{grid-column:auto}}
+
+.feedback-section{background:#fffaf5}
+.feedback-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;max-width:1000px;margin:0 auto}
+.feedback-form,.feedback-list{background:#fff;border:1px solid #f0e5dc;border-radius:16px;padding:22px;box-shadow:0 5px 20px #49362a08}
+.feedback-form label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
+.feedback-form input,.feedback-form textarea,.feedback-form select{width:100%;padding:11px;border:1px solid #dfd4cb;border-radius:9px;background:#fffdfb;color:var(--ink)}
+.feedback-form textarea{min-height:100px;resize:vertical}
+.feedback-stars{display:flex;gap:7px;margin:6px 0 12px}
+.feedback-stars button{background:transparent;color:#b58a4a;padding:2px;font-size:26px}
+.feedback-item{padding:14px 0;border-bottom:1px solid #eee1d8}
+.feedback-item:last-child{border-bottom:0}
+.feedback-item-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.feedback-item-name{font-weight:bold;color:var(--green)}
+.feedback-item-stars{color:#b58a4a;letter-spacing:2px;white-space:nowrap}
+.feedback-item p{font-size:13px;line-height:1.6;color:var(--muted);margin:8px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.feedback-status{font-size:13px;color:var(--muted);line-height:1.5}
+@media(max-width:700px){.feedback-grid{grid-template-columns:1fr}.feedback-form,.feedback-list{padding:17px}}
 </style>
 </head>
 <body>
 <div class="topbar">HANDMADE WITH LOVE · MADE FOR YOUR SPECIAL MOMENTS</div>
 <header>
   <a href="#home" style="text-decoration:none"><div class="brand">Shri Threads<small>Little details, timeless beauty</small></div></a>
-  <nav><a href="#shop">Shop</a><a href="#about">Our Story</a><a href="#contact">Contact</a><button class="secondary" onclick="openCart()">Cart <span id="cartCount">0</span></button></nav>
+  <nav><a href="#shop">Shop</a><a href="#about">Our Story</a><a href="#feedback">Feedback</a><a href="#contact">Contact</a><button class="secondary" onclick="openCart()">Cart <span id="cartCount">0</span></button></nav>
 </header>
 <main>
 <section class="hero" id="home">
@@ -56,7 +73,21 @@ footer{padding:35px clamp(16px,5vw,70px);background:#334a3b;color:white;display:
   <div class="products" id="products"></div>
 </section>
 <section class="about" id="about"><div><div class="eyebrow">A note from us</div><h2>Small details make beautiful memories.</h2><p>Shri Threads celebrates colour, creativity and the joy of handmade accessories. From festive moments to everyday outfits, we hope you find something that feels uniquely yours.</p><p>Have a custom colour or design in mind? Add your chosen products to WhatsApp and tell us what you'd love.</p></div><div class="about-note">“Every thread tells a story, every colour carries a feeling.”</div></section>
-<section id="contact" style="text-align:center;background:#f7e9e4"><div class="section-head"><div class="eyebrow">We'd love to hear from you</div><h2>Let's talk on WhatsApp</h2><p>Questions about colours, sizes, availability or custom orders? Send us a message.</p><button onclick="contactWhatsApp()">Chat with Shri Threads</button></div></section>
+<section class="feedback-section" id="feedback">
+  <div class="section-head"><div class="eyebrow">Your thoughts matter</div><h2>Customer Feedback</h2><p>See what customers are saying and share your experience with Shri Threads.</p></div>
+  <div class="feedback-grid">
+    <form class="feedback-form" id="feedbackForm">
+      <h3 style="font:normal 24px Georgia,serif;color:var(--green);margin:0">Share your feedback ♡</h3>
+      <label for="feedbackName">Your name (optional)</label><input id="feedbackName" maxlength="60" placeholder="Enter your name">
+      <label>Rating</label><select id="feedbackRating" required><option value="5">★★★★★ — Excellent</option><option value="4">★★★★☆ — Very good</option><option value="3">★★★☆☆ — Good</option><option value="2">★★☆☆☆ — Fair</option><option value="1">★☆☆☆☆ — Poor</option></select>
+      <label for="feedbackMessage">Your feedback</label><textarea id="feedbackMessage" maxlength="1000" required placeholder="Tell us about your experience..."></textarea>
+      <button type="submit" style="width:100%;margin-top:14px">Submit feedback</button>
+      <p class="feedback-status" id="feedbackFormStatus" role="status"></p>
+    </form>
+    <div class="feedback-list"><h3 style="font:normal 24px Georgia,serif;color:var(--green);margin:0 0 8px">What customers say</h3><p class="feedback-status" id="feedbackListStatus" role="status">Loading feedback...</p><div id="feedbackItems"></div></div>
+  </div>
+</section>
+<section id="contact" style="text-align:center;background:#f7e9e4"><div class="section-head"><div class="eyebrow">We'd love to hear from you</div><h2>Let's talk on WhatsApp</h2><p>Questions about colours, sizes, availability or custom orders? Send us a message.</p><button onclick="contactWhatsApp()">Chat with Shri Threads</button><p style="font-size:11px;color:#766a68">WhatsApp: 8074364849</p></div></section>
 </main>
 <footer><div><div class="footer-brand">Shri Threads</div><p>Handmade with love, for every little celebration.</p></div><div><strong>Explore</strong><p><a href="#shop">Shop collection</a><br><a href="#about">Our story</a><br><a href="#contact">Contact</a></p></div><div><p>© <span id="year"></span> Shri Threads<br>Made with care ♡</p></div></footer>
 <button class="cart-fab" onclick="openCart()">View cart · <span id="cartCount2">0</span></button>
@@ -205,7 +236,33 @@ function getOrder(){
 function whatsappUrl(message){if(!/^91\d{10}$/.test(WHATSAPP_NUMBER)){alert("Please set your WhatsApp number in the code first. Search for WHATSAPP_NUMBER near the top of the script and enter your Indian number as 91 followed by 10 digits.");return null;}return "https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message);}
 function checkoutWhatsApp(){const o=getOrder();if(!o.entries.length)return;const name=document.getElementById("customerName").value.trim();const message=`Hello Shri Threads! I'd like to place an order.${name?"\nName: "+name:""}\n\n${o.lines.join("\n")}\n\nSubtotal: ${money(o.total)}\nDelivery: Please confirm delivery charges and delivery availability for the selected products.\n\nPlease confirm my order.`;const url=whatsappUrl(message);if(url)window.open(url,"_blank","noopener");}
 function contactWhatsApp(){const url=whatsappUrl("Hello Shri Threads! I'd like to know more about your products.");if(url)window.open(url,"_blank","noopener");}
+async function loadFeedback(){
+  const status=document.getElementById("feedbackListStatus");
+  const root=document.getElementById("feedbackItems");
+  const {data,error}=await db.from("feedback").select("id,name,rating,message,created_at").order("created_at",{ascending:false}).limit(50);
+  if(error){console.error("Could not load feedback:",error);status.textContent="Feedback is temporarily unavailable. Please try again later.";return;}
+  if(!data||!data.length){status.textContent="No feedback yet. Be the first to share your experience!";root.innerHTML="";return;}
+  status.textContent="Recent customer feedback";
+  root.innerHTML=data.map(item=>`<article class="feedback-item"><div class="feedback-item-head"><span class="feedback-item-name">${safe(item.name||"Customer")}</span><span class="feedback-item-stars" aria-label="${Number(item.rating)||5} out of 5 stars">${"★".repeat(Math.max(1,Math.min(5,Number(item.rating)||5)))}${"☆".repeat(5-Math.max(1,Math.min(5,Number(item.rating)||5)))}</span></div><p>${safe(item.message)}</p></article>`).join("");
+}
+document.getElementById("feedbackForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+  const button=event.currentTarget.querySelector('button[type="submit"]');
+  const status=document.getElementById("feedbackFormStatus");
+  const name=document.getElementById("feedbackName").value.trim();
+  const rating=Number(document.getElementById("feedbackRating").value);
+  const message=document.getElementById("feedbackMessage").value.trim();
+  if(!message){status.textContent="Please enter your feedback.";return;}
+  button.disabled=true;status.textContent="Submitting feedback...";
+  const {error}=await db.from("feedback").insert({name:name||"Customer",rating,message});
+  button.disabled=false;
+  if(error){console.error("Could not submit feedback:",error);status.textContent="We couldn't submit your feedback right now. Please try again later.";return;}
+  document.getElementById("feedbackForm").reset();
+  status.textContent="Thank you! Your feedback has been submitted.";
+  await loadFeedback();
+});
 document.getElementById("year").textContent=new Date().getFullYear();
+loadFeedback();
 renderProducts();updateCartCount();
 loadProducts();
 </script>
