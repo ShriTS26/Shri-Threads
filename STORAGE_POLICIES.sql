@@ -1,6 +1,7 @@
 -- Run this in Supabase SQL Editor after creating the public bucket named product-images.
 -- This allows only users registered in public.admin_users to upload, update, or delete images.
 
+drop policy if exists "Admins can upload product images" on storage.objects;
 create policy "Admins can upload product images"
 on storage.objects
 for insert
@@ -10,6 +11,7 @@ with check (
   and exists (select 1 from public.admin_users where user_id = auth.uid())
 );
 
+drop policy if exists "Admins can update product images" on storage.objects;
 create policy "Admins can update product images"
 on storage.objects
 for update
@@ -23,6 +25,7 @@ with check (
   and exists (select 1 from public.admin_users where user_id = auth.uid())
 );
 
+drop policy if exists "Admins can delete product images" on storage.objects;
 create policy "Admins can delete product images"
 on storage.objects
 for delete
