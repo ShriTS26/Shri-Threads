@@ -136,7 +136,15 @@ function setCategory(c){activeCategory=c;renderProducts();}
 function renderProducts(){renderFilters();const list=products.filter(p=>activeCategory==="All"||p.category===activeCategory);const root=document.getElementById("products");if(!list.length){root.innerHTML='<p>No products in this category yet.</p>';return;}root.innerHTML=list.map(p=>`<article class="card"><div class="product-image ${p.image?"":"placeholder"}">${p.image?`<img src="${safe(p.image)}" alt="${safe(p.name)}" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.innerHTML='♡'">`:"♡"}</div><div class="card-content"><div class="category">${safe(p.category)}</div><h3>${safe(p.name)}</h3><div class="description">${safe(p.description||"Handpicked with love by Shri Threads.")}</div><div class="price">${money(p.price)}</div><div class="stock">${safe(p.stock)}</div><button ${p.stock!=="In stock"?"disabled style='opacity:.5'":""} onclick="addToCart('${p.id}')">${p.stock==="In stock"?"Add to cart":"Sold out"}</button></div></article>`).join("");}
 function addToCart(id){const p=products.find(x=>x.id===id);if(!p||p.stock!=="In stock")return;cart[id]=(cart[id]||0)+1;saveCart();openCart();}
 function saveCart(){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartCount();}
-function updateCartCount(){const n=Object.values(cart).reduce((a,b)=>a+Number(b),0);document.getElementById("cartCount").textContent=n;document.getElementById("cartCount2").textContent=n;}
+function updateCartCount(){
+  const n = Object.values(cart).reduce((a,b) => a + Number(b), 0);
+  const cartCount = document.getElementById("cartCount");
+  const cartCount2 = document.getElementById("cartCount2");
+
+  if (cartCount) cartCount.textContent = n;
+  if (cartCount2) cartCount2.textContent = n;
+}
+
 function openCart(){renderCart();document.getElementById("cartOverlay").classList.add("open");}
 function closeCart(){document.getElementById("cartOverlay").classList.remove("open");}
 function changeQty(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];saveCart();renderCart();}
